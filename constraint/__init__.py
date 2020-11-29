@@ -964,12 +964,12 @@ class FunctionConstraint(Constraint):
         parms = [assignments.get(x, _unassigned) for x in variables]
         missing = parms.count(_unassigned)
         if missing:
-            return (self._assigned or self._func(*parms)) and (
+            return (self._assigned or self._func(parms, variables)) and (
                 not forwardcheck or
                 missing != 1 or
                 self.forwardCheck(variables, domains, assignments)
             )
-        return self._func(*parms)
+        return self._func(parms, variables)
 
 
 class AllDifferentConstraint(Constraint):
